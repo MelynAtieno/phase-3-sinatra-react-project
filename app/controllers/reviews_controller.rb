@@ -48,6 +48,7 @@ class ReviewsController < ApplicationController
     
           redirect "reviews/new"
         end
+        redirect "/user/#{@user.slug}"
     end
     
     get "/reviews/:id/edit" do
@@ -79,7 +80,9 @@ class ReviewsController < ApplicationController
         end
     
         redirect "/reviews/#{@review.id}"
+
     end
+
 
     get "/reviews/:id" do
         logged_in_verification
