@@ -4,9 +4,9 @@ user = User.create({name:"Felistus", email:"felistus@felistus.com", country:"Gha
 user = User.create({name: "Andrew", email:"andrew@gmail.com", country:"UK"})
 
 
-restaurant = Restaurant.create({name:"Teule", contact: "00204", location: "Nairobi"})
-restaurant = Restaurant.create({name:"Hella", contact:"45903", location:"Lagos"})
-restaurant = Restaurant.create({name:"Fille", contact:"34990", location:"New York"})
+restaurant = Restaurant.create({name:"Teule", contact: "00204", city: "Nairobi"})
+restaurant = Restaurant.create({name:"Hella", contact:"45903", city:"Lagos"})
+restaurant = Restaurant.create({name:"Fille", contact:"34990", city:"New York"})
 
 rate = Rate.create({user_id: user.id, restaurant_id: restaurant.id, rating:"4"})
 rate = Rate.create({user_id: user.id, restaurant_id: restaurant.id, rating:"3"})
