@@ -20,7 +20,7 @@ class ApplicationController < Sinatra::Base
 
  
 
-  def user_session(session)
+  def current_user(session)
     @user = User.find_by_id(session[:user_id])
   end
 
@@ -36,7 +36,6 @@ class ApplicationController < Sinatra::Base
     end.join(" ")
   end
 
-
   def logged_in_verification
     if is_logged_in?(session)
       @user = current_user(session)
@@ -51,7 +50,7 @@ class ApplicationController < Sinatra::Base
        "readonly"
     end
   end
-  
+
 
   def read_only_disabled
     if !(@restaurant.creator_id == @review.user_id) 
