@@ -1,11 +1,12 @@
 .App {
-  text-align: center;
+  text-align: left;
   background-color: aliceblue;
+  margin-bottom: 0px
 }
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 30vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,5 +14,19 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+form{
+  background-color: beige;
+  height: 200px;
+  width: 300px;
+  
+}
+
+h1{
+  text-align: left;
+}
+
+
+
+
 
 
