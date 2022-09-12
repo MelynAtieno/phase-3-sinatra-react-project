@@ -19,9 +19,9 @@ class ApplicationController < Sinatra::Base
     restaurant.to_json
   end
 
-  get "/restaurant/:id" do
+  get "/restaurant/:restaurant_name" do
   
-    restaurant = Restaurant.find(params[:id])
+    restaurant = Restaurant.find(params[:restaurant_name])
     restaurant.to_json
   end
 
@@ -32,14 +32,15 @@ class ApplicationController < Sinatra::Base
 
   post "/reviews" do
     review = Review.create(
+      name: params[:restaurant_name],
       rating: params[:rating],
       feedback: params[:feedback]
     )
     review.to_json
   end
 
-  delete "/reviews/:id/delete" do
-    review = Review.find(params[:id])
+  delete "/reviews/:restaurant_name/delete" do
+    review = Review.find(params[:restaurant_name])
     review.destroy
 
     redirect "/reviews"
@@ -47,10 +48,11 @@ class ApplicationController < Sinatra::Base
   end
 
 
-  patch "/reviews/:id" do
+  patch "/reviews/:restaurant_name" do
 
-    review = Review.find(params[:id])
+    review = Review.find(params[:restaurant_name])
     review.update(
+      name: params[:restaurant_name]
       rating: params[:rating],
       feedback: params[:feedback] 
     )
