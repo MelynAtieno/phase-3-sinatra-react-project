@@ -8,7 +8,7 @@ import Restaurants from './Components/Restaurants';
 function App() {
 
   const [reviews, setReviews] = useState([]);
-  //const [restaurants, setRestaurants] = useState([]);
+  
 
 
   useEffect(() => {
