@@ -12,3 +12,6 @@ review = Review.create({user_id: user.id, restaurant_id: restaurant.id, restaura
 review = Review.create({user_id: user.id, restaurant_id: restaurant.id, restaurant_name:"Teule",rating:"3", feedback:"I didn't like their fries"})
 review = Review.create({user_id: user.id, restaurant_id: restaurant.id, restaurant_name:"Fille",rating:"5",feedback:"The ambience and the food portions are great!"})
 
+
+
+   
