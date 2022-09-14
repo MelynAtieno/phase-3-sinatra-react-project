@@ -1,13 +1,17 @@
 import './App.css';
 import React, {useEffect, useState} from 'react';
 import Form from "./Components/Form";
-import Reviews from './Components/Reviews';
+import Review from './Components/Review';
 import Restaurants from './Components/Restaurants';
+import ReviewsContainer from './Components/ReviewsContainer';
 
 
 function App() {
 
   const [reviews, setReviews] = useState([]);
+  //const reviewsToDisplay = reviews.filter((rating) => || poem.isFavorite);
+  //const [formVisible, setFormVisible] = useState(true);
+  
   
 
 
@@ -21,6 +25,20 @@ function App() {
     setReviews([...reviews, NewReview]);
   }
 
+  function RemoveReview(ReviewToRemove) {
+    setReviews([...reviews, ReviewToRemove])
+  }
+
+  function renderReviewView() {
+      return (
+        <ReviewsContainer 
+          Review = {reviews}
+          RemoveReview={RemoveReview} 
+        />
+      )
+    }
+  
+
  
   
 return (
@@ -33,9 +51,10 @@ return (
       </header>
       
       <Form AddReview= {AddReview}/>
-      <Reviews/>
+      <Review/>
       <Restaurants />
 </div>
+  {renderReviewView()}
 </div>
 
 );
