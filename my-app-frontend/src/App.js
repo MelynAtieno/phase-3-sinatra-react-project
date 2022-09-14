@@ -1,5 +1,5 @@
 import './App.css';
-import React, {useEffect, useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Form from "./Components/Form";
 import Review from './Components/Review';
 import Restaurants from './Components/Restaurants';
@@ -7,40 +7,64 @@ import ReviewsContainer from './Components/ReviewsContainer';
 
 
 function App() {
-
-  const [reviews, setReviews] = useState([]);
-  //const reviewsToDisplay = reviews.filter((rating) => || poem.isFavorite);
-  //const [formVisible, setFormVisible] = useState(true);
   
-  
+  const [allReviews,setReviews] = useState([])
 
-
-  useEffect(() => {
+  useEffect(()=>{
     fetch("http://localhost:9292/reviews")
-      .then(res => res.json())
-      .then(data => setReviews(data))
-  }, []);
+    .then(resp => resp.json())
+    .then(reviews => setReviews(reviews))
+},[])
 
-  function AddReview(NewReview) {
-    setReviews([...reviews, NewReview]);
-  }
+  function addReview(review){
+    setReviews([...allReviews, review])
 
-  function RemoveReview(ReviewToRemove) {
-    setReviews([...reviews, ReviewToRemove])
-  }
+    fetch("http://localhost:9292/reviews",{
+      method: "POST",
+            headers:{
+                "content-type" : "application/json",
+                "accept" : "application/json"
+            },
+            body: JSON.stringify(review)
+    })
+    .then(resp => resp.json())
+        .then(resp => addReview(resp))
+}
 
-  function renderReviewView() {
-      return (
-        <ReviewsContainer 
-          Review = {reviews}
-          RemoveReview={RemoveReview} 
-        />
-      )
-    }
-  
+function deleteReview({id}){
+  fetch(`http://localhost:9292/reviews/${id}/delete`,{
+      method: 'DELETE'
+  })
+      .then(resp => resp.json())
+      .then()
+}
 
- 
-  
+function showRestaurants(){
+  fetch("http://localhost:9292/restaurant",{
+            method: "GET",
+            headers:{
+                "content-type" : "application/json",
+                "accept" : "application/json"
+            },
+            body: JSON.stringify()
+        })
+        .then(resp => resp.json())
+        .then(resp => showRestaurants(resp))
+}
+
+function showReviews(){
+  fetch("http://localhost:9292/reviews",{
+            method: "GET",
+            headers:{
+                "content-type" : "application/json",
+                "accept" : "application/json"
+            },
+            body: JSON.stringify()
+        })
+        .then(resp => resp.json())
+        .then(resp => showReviews(resp))
+}
+
 return (
     <div className="App">
       <div className='sidebar'>
@@ -50,11 +74,16 @@ return (
         
       </header>
       
-      <Form AddReview= {AddReview}/>
-      <Review/>
-      <Restaurants />
+      <Form addReview= {addReview}/>
+      
+      <ReviewsContainer showReviews={showReviews}/>
+
+      <Review deleteReview={deleteReview}/>
+      
+      <Restaurants showRestaurants={showRestaurants}/>
+      
 </div>
-  {renderReviewView()}
+  
 </div>
 
 );

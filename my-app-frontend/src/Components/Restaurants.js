@@ -1,19 +1,11 @@
 import React from "react";
 
-function Restaurants({restaurants, ShowRestaurants}){
-    function onSubmitClick(e){
-        e.preventDefault();
-        
-        fetch("http://localhost:9292/restaurant" ,{
-          method: "GET",
-        });
-        ShowRestaurants(restaurants);
-      }
+function Restaurants({showRestaurants}){
     
       
     return (
           <div>
-            <button onSubmitClick={onSubmitClick}>SHOW RESTAURANTS</button>
+            <button onClick={showRestaurants}>SHOW RESTAURANTS</button>
           </div>
     
         );

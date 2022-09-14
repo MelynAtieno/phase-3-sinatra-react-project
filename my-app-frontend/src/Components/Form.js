@@ -1,17 +1,17 @@
 import React ,{useState} from "react"
 
 
-function Form({AddReview}){
+function Form({addReview}){
     const [restaurant_name, setRestaurant_name] = useState("");
     const [rating, setRating] = useState("");
     const [feedback, setFeedback] = useState("");
 
-            function handleSubmit(e) {
-                e.preventDefault();
+            function handleSubmit() {
                 fetch("http://localhost:9292/reviews", {
                   method: "POST",
                   headers: {
-                    "Content-Type": "application/json",
+                    "content-type": "application/json",
+                    "accept": "application/json"
                   },
                   body: JSON.stringify({
                     restaurant_name,
@@ -19,12 +19,9 @@ function Form({AddReview}){
                     feedback,
                   }),
                 })
-                  .then((r) => r.json())
-                  .then((NewReview) => AddReview(NewReview));
-            
-                setRestaurant_name("");
-                setRating("");
-                setFeedback("");
+                  .then((resp) => resp.json())
+                  .then(resp => addReview(resp));
+          
               }
         
 
@@ -32,17 +29,18 @@ function Form({AddReview}){
       return(
         <div>
             <h1>Add a review</h1>
-          <form onSubmit={handleSubmit} >
+          <form  >
             <label>Restaurant Name: </label>
                 <input type='text' value={restaurant_name} onChange={(e) => setRestaurant_name(e.target.value)}></input>
             <label>Rating(Out of 5):</label>
                 <input type='integer' value={rating} onChange={(e) => setRating(e.target.value)}></input>
             <label >Feedback:</label>
                 <textarea type='text' value={feedback} onChange={(e) => setFeedback(e.target.value)}></textarea> 
-            <input type="submit" value="Share your review" />
-                   
+                <button onClick={handleSubmit}>SHARE REVIEW</button>
+                 
             
           </form>
+          
           
         </div>
       );
