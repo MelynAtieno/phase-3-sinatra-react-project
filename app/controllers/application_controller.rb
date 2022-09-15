@@ -42,9 +42,9 @@ class ApplicationController < Sinatra::Base
   delete "/reviews/:id" do
     review = Review.find(params[:id])
     review.destroy
-    review.to_json
 
-    #redirect "/reviews"
+
+    redirect "/reviews"
 
   end
 
